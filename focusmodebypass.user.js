@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name          Focus mode Bypass
+// @author        https://github.com/Anghkooey/
 // @namespace     https://github.com/Anghkooey/focus-mode-bypass
 // @version       3.0.0
 // @description   Prevents websites from detecting tab switches or window unfocus without breaking website functionality
