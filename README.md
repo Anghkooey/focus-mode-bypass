@@ -36,7 +36,7 @@
 ### 📥 **_Installation Steps_**
 
 #### 1. **_Download the Script_**  
-**_Click [here](https://github.com/Anghkooey/focus-mode-bypass/raw/main/focus-mode-bypass.user.js) to install the userscript._**
+**_Click [here](https://github.com/Anghkooey/focus-mode-bypass/raw/main/focusmodebypass.user.js) to install the userscript._**
 
 #### 2. **_Add the Script to Tampermonkey_**  
 - **_Open Tampermonkey dashboard._**
