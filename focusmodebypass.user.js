@@ -5,6 +5,7 @@
 // @version       3.0.0
 // @description   Prevents websites from detecting tab switches or window unfocus without breaking website functionality
 // @include       *
+// @run-at        document-start
 // ==/UserScript==
 
 (() => {
@@ -93,4 +94,6 @@
         document.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a', bubbles: true }));
     }, 10000);
+
+    console.log('Safe and Enhanced Always On Focus script applied.');
 })();
