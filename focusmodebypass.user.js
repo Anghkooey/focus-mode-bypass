@@ -2,8 +2,8 @@
 // @name          Focus mode Bypass
 // @author        https://github.com/Anghkooey/
 // @namespace     https://github.com/Anghkooey/focus-mode-bypass
-// @version       3.0.0
-// @description   Prevents websites from detecting tab switches or window unfocus without breaking website functionality
+// @version       3.1.0
+// @description   Prevents websites from detecting tab switches, window unfocus, and fullscreen detection without breaking website functionality
 // @include       *
 // @run-at        document-start
 // ==/UserScript==
@@ -30,6 +30,14 @@
     unsafeWindow.onblur = null;
     unsafeWindow.onfocus = null;
     unsafeWindow.document.hasFocus = () => true;
+
+    // Emulate fullscreen state
+    Object.defineProperty(document, 'fullscreenElement', { get: () => document.documentElement });
+    Object.defineProperty(document, 'webkitFullscreenElement', { get: () => document.documentElement });
+    Object.defineProperty(document, 'fullscreenEnabled', { get: () => true });
+    Object.defineProperty(document, 'webkitFullscreenEnabled', { get: () => true });
+    document.onfullscreenchange = null;
+    document.onwebkitfullscreenchange = null;
 
     // Override `requestAnimationFrame` to ensure consistent activity
     window.requestAnimationFrame = (callback) => originalRAF(() => {
@@ -58,7 +66,7 @@
         get: () => document.body,
     });
 
-    // Allow essential event listeners but block visibility-related ones
+    // Allow essential event listeners but block visibility and fullscreen-related ones
     const blockedEvents = new Set([
         'visibilitychange',
         'webkitvisibilitychange',
@@ -66,6 +74,8 @@
         'focus',
         'mouseleave',
         'mouseout',
+        'fullscreenchange',
+        'webkitfullscreenchange',
     ]);
 
     window.addEventListener = new Proxy(window.addEventListener, {
@@ -94,6 +104,4 @@
         document.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }));
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'a', bubbles: true }));
     }, 10000);
-
-    console.log('Safe and Enhanced Always On Focus script applied.');
 })();
